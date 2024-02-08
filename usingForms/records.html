@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Records</title>
+</head>
+
+<body>
+    <a href="index.html">Add records</a>
+
+    <h1>Records of Students</h1>
+    <hr>
+    <table border="1px solid black" width="100%">
+        <thead>
+            <tr>
+                <th>Sn</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Courses</th>
+                <th>Country</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tableData">
+        </tbody>
+
+
+    </table>
+
+    <script>
+        function getData() {
+            fetch("http://localhost:3000/get").then((res) => {
+                console.log("data fetched");
+                return res.json();
+            }).then((data) => {
+                let output = "";
+                data.map((record, index) => {
+                    output += `
+                    <tr>
+                            <td>${++index}</td>
+                            <td>${record.name}</td>
+                            <td>${record.email}</td>
+                            <td>${record.gender}</td>
+                            <td>${record.course}</td>
+                            <td>${record.country}</td>
+                            <td>${record.description}</td>
+                            <td><button>Edit</button><button>Delete</button></td>
+                        </tr>
+                    `
+                });
+                document.getElementById("tableData").innerHTML = output;
+            }).catch((e) => {
+                console.log("Error displaying data", e);
+            })
+
+        }
+
+        getData();
+    </script>
+
+</body>
+
+</html>

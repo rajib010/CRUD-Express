@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Record CRUD</title>
+</head>
+
+<body>
+    <h1>Employee Records</h1>
+    <hr>
+    <blockquote>
+        <table border="1" width="98%" margin="auto">
+            <thead>
+                <th>Sn</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>Action</th>
+            </thead>
+            <tbody id="employee_list">
+            </tbody>
+        </table>
+    </blockquote>
+
+
+    <script>
+        function getData() {
+            fetch("http://localhost:4000/").then((res) => {
+                return res.json();
+            }).then((data) => {
+                let output = ""
+                data.map((employee, index) => {
+                    output += `
+                   <tr>
+                        <td>${++index}</td>
+                        <td>${employee.name}</td>
+                        <td>${employee.age}</td>
+                        <td>${employee.address}</td>
+                        <td> <button>Edit</button>
+                            <button>Delete</button> </td>
+                    </tr>
+                   `;
+
+                });
+                document.getElementById("employee_list").innerHTML = output;
+
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+
+        getData();
+    </script>
+
+</body>
+
+</html>

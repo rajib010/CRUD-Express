@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <blockquote>
+        <h1>Student Management</h1>
+        <hr>
+        <table border="1" width="100%">
+            <thead>
+                <tr>
+                    <th>S.n</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="students_list">
+
+            </tbody>
+        </table>
+    </blockquote>
+
+    <script>
+        function getData() {
+            fetch("http://127.0.0.1:3000/").then((res) => {
+                return res.json();
+            }).then((data) => {
+                let output = "";
+                data.map((student, index) => {
+                    output += `
+                    <tr>
+                        <td>${++index}</td>
+                        <td>${student.name}</td>
+                        <td>${student.email}</td>
+                        <td>${student.address}</td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </td>
+                    </tr>
+                `;
+                })
+                document.getElementById("students_list").innerHTML = output;
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+
+        getData();
+    </script>
+
+</body>
+
+</html>
