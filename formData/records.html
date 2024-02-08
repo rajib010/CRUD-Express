@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Records</title>
+</head>
+
+<body>
+    <a href="./index.html">Add records</a>
+    <hr>
+
+    <table border="1px solid black" width="100%">
+        <thead>
+            <tr>
+                <th>Sn</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tableInfo">
+
+        </tbody>
+    </table>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("http://localhost:3000/get").then((res) => {
+                return res.json();;
+            }).then((data) => {
+                let output = "";
+                data.map((user, index) => {
+                    output += `
+                        <tr>
+                            <td>${++index}</td>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td><button>Add</button><button>Delete</button>
+                        </tr>
+                    `
+                });
+                document.querySelector("#tableInfo").innerHTML = output;
+            }).catch((e) => {
+                console.log("Error fetching data from DB", e);
+            });
+        })
+    </script>
+</body>
+
+</html>

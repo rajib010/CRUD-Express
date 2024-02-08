@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Data</title>
+</head>
+
+<body>
+
+    <a href="./records.html">See records</a>
+    <hr>
+    <h1>Enter User Information</h1>
+
+    <form id="userForm">
+        <p>Name:</p>
+        <input type="text" name="name" id="name"> <br>
+        <p>Email:</p>
+        <input type="email" name="email" id="email"><br> <br> <br>
+        <button type="submit"> Add records</button>
+    </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("userForm");
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+                const userData = {
+                    name: formData.get("name"),
+                    email: formData.get("email")
+                }
+
+                try {
+                    const response = await fetch("http://localhost:3000/post", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(userData)
+                    });
+
+                    if (!response.ok) {
+                        alert("Failed to store data");
+                    }
+
+                    alert("Data stored successfully");
+                    form.reset();
+
+                } catch (e) {
+                    console.log("Error posting datainto Database", e);
+                }
+            });
+
+        });
+
+    </script>
+</body>
+
+</html>
