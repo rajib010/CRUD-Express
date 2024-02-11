@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+
+    <h1 class="m-2">User Information</h1>
+    <hr>
+    <div class="mx-5 d-flex flex-row justify-content-between">
+        <div class="col-4 mx-1">
+            <form class="form-control" id="formData">
+                <!-- Username -->
+                <div class="mb-3">
+                    <label for="username" class="form-label">Enter Your Name</label>
+                    <input type="text" class="form-control" name="name" id="username">
+                </div>
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" id="email">
+                </div>
+                <!-- Gender -->
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Select your gender: </label><br>
+                    <span>Male</span>
+                    <input type="radio" name="gender" id="gender" value="male">
+                    <span>Female</span>
+                    <input type="radio" name="gender" id="gender" value="Female">
+                </div>
+                <!-- Languages -->
+                <div class="mb-3">
+                    <label class="form-label">Select the languages</label> <br>
+                    <span class="mx-1">Nepali</span><input type="checkbox" value="Nepali" name="language">
+                    <span class="mx-1">English</span><input type="checkbox" value="English" name="language">
+                    <span class="mx-1">Chineese</span><input type="checkbox" value="Chineese" name="language">
+                </div>
+                <!-- country -->
+                <div>
+                    <select name="country">
+                        <option hidden selected disabled>---Select your Country--</option>
+                        <option value="Nepal">Nepal</option>
+                        <option value="India">India</option>
+                        <option value="China">China</option>
+                    </select>
+                </div>
+                <!-- add -->
+                <div>
+                    <button class="btn btn-success m-3" type="submit">Add records</button>
+                </div>
+            </form>
+        </div>
+        <div class="col mx-1">
+            <table class="table" width="100%" border="1px solid black">
+                <thead>
+                    <tr>
+                        <th>Sn</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Language</th>
+                        <th>Country</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="table_contents">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="./custom.js"></script>
+</body>
+
+</html>

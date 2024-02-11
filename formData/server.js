@@ -25,11 +25,24 @@ app.get("/get", async (req, res) => {
     return res.status(200).json(data);
 });
 
+app.get("/:id", async (req, res) => {
+    let id = req.params.id;
+    let user = await User.findOne({ _id: id });
+    return res.json({ user });
+});
+
 app.post("/post", async (req, res) => {
     const { name, email } = req.body;
     let userInfo = new User({ name, email });
     await userInfo.save();
     return res.status(201).send(userInfo);
+});
+
+
+app.delete('/:id', async (req, res) => {
+    let id = req.params.id;
+    await User.deleteOne({ _id: id });
+    return res.json({ message: 'User deleted' });
 });
 
 app.listen(3000, () => {
